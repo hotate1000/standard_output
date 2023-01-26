@@ -1,5 +1,5 @@
-# ---------------
-# ---------------
+# ------------------------------
+# ------------------------------
 h, w = input().split();
 h = int(h);
 w = int(w);
@@ -32,8 +32,46 @@ for j in range(h):
             answer += ' ' + str((a1 + j * x1_y2_1) + ((x2_1_y1 + x_h * j)  * i));
     print(answer);
 
-# ---------------
-# ---------------
+
+# ------------------------------
+# ------------------------------
+N,M = input().split();
+N = int(N);
+M = int(M);
+
+length = M + M * N;
+value_list = [];
+value_list_int = [];
+anser_list = [];
+
+for i in range(length):
+    value_list.append(input());
+for i in value_list:
+    value_list_int.append(int(i));
+
+score = 100;
+for j in range(N):
+    score = 100;
+    for i in range(M):
+        value = abs(value_list_int[i] - value_list_int[i + (M * (j + 1))]);
+        if value <= 5: 
+            score -= 0;
+        elif value <= 10:
+            score -= 1;
+        elif value <= 20:
+            score -= 2;
+        elif value <= 30:
+            score -= 3;
+        else:
+            score -= 5;
+        if score <= 0:
+            score = 0;
+    anser_list.append(score);
+print(max(anser_list));
+
+
+# ------------------------------
+# ------------------------------
 a = int(input());
 value_list = [];
 value_list_int = [];
@@ -54,3 +92,38 @@ for i,j in enumerate(range(max_val)):
             if check-1 == max_val:
                 print(i);
                 break;
+
+
+# ------------------------------
+# paizaはberakを利用するとエラーとなる。
+# ------------------------------
+N, C1, C2 = input().split();
+N  = int(N);
+C1 = int(C1);
+C2 = int(C2);
+
+cost = 0;
+anser = 0;
+value_list_int = [];
+
+for i in range(N):
+    value_list_int.append(int(input()));
+
+for x,i in enumerate(value_list_int):
+    if x == len(value_list_int) - 1:
+        if cost > 0:
+            anser += i * cost;
+            cost = 0;
+    elif i <= C1:
+        cost += 1;
+        anser -= i;
+    elif C1 < i and i < C2:
+        break;
+    elif C2 <= i:
+        if cost > 0:
+            anser += i * cost;
+            cost = 0;
+        else:
+            break;
+
+print(anser);
